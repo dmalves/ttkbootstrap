@@ -10,7 +10,7 @@ def clear_press(display: ttk.Label):
     display["text"] = 0
 
 
-app = ttk.Window("Calculator")
+app = ttk.Window("Calculator", "flatly", resizable=False)
 
 mframe = ttk.Frame(app, padding=5)
 mframe.pack(fill=ttk.BOTH, expand=ttk.YES)

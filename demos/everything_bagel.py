@@ -21,7 +21,9 @@ If the implementation is easy to explain, it may be a good idea.
 Namespaces are one honking great idea -- let's do more of those!"""
 
 
-app = ttk.Window('ttkbootstrap Widget Demo', 'superhero')
+app = ttk.Window(
+    title='ttkbootstrap Widget Demo', 
+    theme='superhero')
 
 # horizontal scrollbar
 sb1 = ttk.Scrollbar(app, orient=ttk.HORIZONTAL)
@@ -49,7 +51,7 @@ ttk.Label(theme_frame, text="Theme").pack(side=ttk.LEFT)
 cbo = ttk.Combobox(theme_frame, text=app.theme.name, values=app.theme.theme_names(),
                    bootstyle=ttk.INFO)
 cbo.pack(side=ttk.LEFT, padx=10)
-cbo.current(0)
+cbo.current(app.theme.theme_names().index(app.theme.name))
 
 
 def change_theme(e):
@@ -122,20 +124,19 @@ data = [
 ]
 
 # treeview
-tv = ttk.Treeview(ttframe, columns=[0, 1], show=ttk.HEADINGS)
+tv = ttk.Treeview(ttframe, columns=[0, 1], show=ttk.HEADINGS, height=5)
 for row in data:
     tv.insert('', 'end', values=row)
 tv.selection_set('I001')
 tv.heading(0, text='City')
 tv.heading(1, text='Rank')
-tv.pack(side=ttk.LEFT, anchor=ttk.NE, fill=ttk.BOTH, padx=(0, 2))
+tv.column(1, width=50, anchor=ttk.CENTER)
+tv.pack(side=ttk.LEFT, anchor=ttk.NE, padx=(0, 2))
 
-
-# # text widget
-# txt = Text(ttframe, bootstyle=ROUNDED, height=5, width=50)
-# txt.scrollbar.set(show_arrows=False)
-# txt.insert(END, ZEN)
-# txt.pack(side=RIGHT, anchor=NW, fill=BOTH, padx=(2, 0))
+# text widget
+txt = ttk.Text(ttframe, height=5, width=50)
+txt.insert(ttk.END, ZEN)
+txt.pack(side=ttk.RIGHT, anchor=ttk.NW, padx=(2, 0), fill=ttk.Y)
 
 # # notebook with table and text tabs
 nb = ttk.Notebook(lframe)
@@ -186,12 +187,15 @@ lb.activate(0)
 vframe = ttk.Frame(rframe)
 vframe.pack(expand=ttk.YES, fill=ttk.BOTH)
 cnf = {'fill': ttk.Y, 'padx': 5, 'side': ttk.LEFT, 'expand': ttk.YES}
-s1 = ttk.Scale(vframe, orient=ttk.VERTICAL, value=50)
+s1 = ttk.Scale(vframe, orient=ttk.VERTICAL, value=50, from_=100, to=0)
 s1.pack(**cnf)
 s1.bind_mousewheel()
 
-ttk.Scale(vframe, orient=ttk.VERTICAL,
-          bootstyle=ttk.SECONDARY, value=75).pack(**cnf)
+s2 = ttk.Scale(vframe, orient=ttk.VERTICAL, bootstyle=ttk.SECONDARY,
+               value=75, from_=100, to=0)
+s2.pack(**cnf)
+s2.bind_mousewheel()
+
 ttk.Scrollbar(vframe, bootstyle=ttk.SUCCESS).pack(**cnf)
 ttk.Scrollbar(vframe, bootstyle=ttk.INFO).pack(**cnf)
 ttk.Progressbar(vframe, orient=ttk.VERTICAL, value=50,

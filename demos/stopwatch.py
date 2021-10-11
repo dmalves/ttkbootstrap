@@ -3,8 +3,8 @@ import ttkbootstrap as ttk
 
 class Stopwatch(ttk.Window):
     def __init__(self):
-        super().__init__(title="Stopwatch Demo", theme="cyborg")
-        self.resizable(0, 0)
+        super().__init__(title="Stopwatch Demo", theme="cosmo", 
+                         resizable=False)
         self.running = ttk.Variable(value=False)
         self.elapsed = ttk.Variable(value=0)
 
@@ -22,6 +22,8 @@ class Stopwatch(ttk.Window):
         )
         self.btn_start.pack(side=ttk.LEFT, fill=ttk.X,
                             padx=5, pady=5, expand=True)
+        self.btn_start.focus_set()
+        self.btn_start.bind_return_key()
 
         self.btn_reset = ttk.Button(
             self,
