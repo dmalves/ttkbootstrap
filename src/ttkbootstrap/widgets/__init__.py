@@ -17,6 +17,7 @@ from .scrollbar import Scrollbar
 from .separator import Separator
 from .sizegrip import Sizegrip
 from .spinbox import Spinbox
+from .text import Text
 from .treeview import Treeview
 from .window import Window
 from .widget import Widget

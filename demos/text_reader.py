@@ -1,4 +1,5 @@
-import freestyle as fs
+from PIL.Image import register_save
+import ttkbootstrap as ttk
 from tkinter import filedialog
 
 
@@ -8,21 +9,21 @@ def open_file():
         return
 
     with open(path, encoding='utf-8') as f:
-        txt.delete("1.0", fs.END)
-        txt.insert(fs.END, f.read())
+        txt.delete("1.0", ttk.END)
+        txt.insert(ttk.END, f.read())
         ent['text'] = path
 
 
-app = fs.Window(title="Text Reader", theme="minty")
+app = ttk.Window(title="Text Reader", theme="superhero", resizable=False)
 
-txt = fs.Text(app, freestyle=fs.ROUNDED)
-txt.pack_set(fill=fs.BOTH, expand=fs.YES, padx=5, pady=5)
-txt.scrollbar.set(show_arrows=False)
+txt = ttk.Text(app, bootstyle=ttk.ROUNDED)
+txt.pack(side=ttk.TOP, fill=ttk.BOTH, expand=ttk.YES, padx=5, pady=5)
 
-ent = fs.Entry(app)
-ent.pack_set(side=fs.LEFT, fill=fs.X, expand=fs.YES, padx=(5, 0), pady=(2, 5))
+ent = ttk.Entry(app)
+ent.pack(side=ttk.LEFT, fill=ttk.X, expand=ttk.YES, padx=(5, 0), pady=(2, 5))
 
-btn = fs.Button(app, text="Browse", command=open_file)
-btn.pack_set(side=fs.RIGHT, fill=fs.X, padx=5, pady=(2, 5))
 
-app.run()
+btn = ttk.Button(app, text="Browse", command=open_file)
+btn.pack(side=ttk.RIGHT, fill=ttk.X, padx=5, pady=(2, 5))
+
+app.mainloop()

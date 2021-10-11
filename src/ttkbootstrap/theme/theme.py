@@ -2369,6 +2369,27 @@ class ThemeBuilder:
         )
         self.theme.register_style(widget._ttkstyle)
 
+    def update_text_style(self, widget):
+        colors = self.theme.colors
+        
+        widget.configure(
+            background=colors.inputbg,
+            foreground=colors.inputfg,
+            insertbackground=colors.inputfg,
+            selectbackground=colors.selectbg,
+            selectforeground=colors.selectfg,
+            relief=FLAT,
+            borderwidth=0,
+            highlightthickness=0,
+            insertwidth=1,
+            font='TkTextFont'
+        )
+        frame_style = ''.join(widget._bootstyle)
+        if widget.focusframe:
+            frame_style += FOCUSFRAME
+            widget.container._bootstyle = frame_style
+            widget.container._configure_bootstyle(self)
+
     def create_treeview_style(self, widget):
 
         row_height = 20
